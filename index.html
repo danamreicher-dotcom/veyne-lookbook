@@ -32,7 +32,7 @@
     color:#a99b86;font-weight:400}
 
   .deck{position:relative;z-index:2;width:100%;flex:1;min-height:clamp(400px,56vh,580px);
-    display:flex;align-items:center;justify-content:center;perspective:1500px;perspective-origin:50% 40%}
+    display:flex;align-items:center;justify-content:center;perspective:1050px;perspective-origin:50% 42%}
   .floorglow{position:absolute;left:50%;top:50%;transform:translate(-50%,clamp(132px,25vw,196px));
     width:clamp(220px,42vw,360px);height:clamp(60px,9vw,84px);
     background:radial-gradient(60% 60% at 50% 50%,rgba(255,250,240,.9) 0%,rgba(255,250,240,0) 70%);
@@ -124,10 +124,10 @@
 
   function layout(off){
     const sign=Math.sign(off), a=Math.abs(off);
-    if(a===0) return {tx:0,   tz:40,  ry:0,        sc:1,   op:1,   z:100, blur:0};
-    if(a===1) return {tx:64*sign, tz:-250, ry:-40*sign, sc:.80, op:1,   z:90,  blur:0};
-    if(a===2) return {tx:120*sign,tz:-500, ry:-47*sign, sc:.60, op:.38, z:80,  blur:2.5};
-    return        {tx:150*sign,tz:-700, ry:-50*sign, sc:.50, op:0,   z:10,  blur:4};
+    if(a===0) return {tx:0,        tz:90,   ry:0,        sc:1,   op:1,   z:100, blur:0};
+    if(a===1) return {tx:56*sign,  tz:-110, ry:-52*sign, sc:.84, op:1,   z:90,  blur:0};
+    if(a===2) return {tx:99*sign,  tz:-340, ry:-56*sign, sc:.66, op:.62, z:80,  blur:1.2};
+    return        {tx:128*sign, tz:-560, ry:-58*sign, sc:.54, op:0,   z:10,  blur:3};
   }
 
   // build cards once
@@ -158,7 +158,9 @@
       c.style.transform=`translate(-50%,-50%) translateX(${L.tx}%) translateZ(${L.tz}px) rotateY(${L.ry}deg) scale(${L.sc})`;
       c.style.opacity=L.op;
       c.style.zIndex=L.z;
-      c.style.filter=front?'drop-shadow(0 34px 30px rgba(140,104,78,.26))':(L.blur?`blur(${L.blur}px)`:'none');
+      c.style.filter=front
+        ? 'drop-shadow(0 38px 34px rgba(120,86,58,.34))'
+        : `drop-shadow(0 22px 26px rgba(120,86,58,.24))${L.blur?` blur(${L.blur}px)`:''}`;
       c.style.pointerEvents=L.op===0?'none':'auto';
       c.style.cursor=front?'default':'pointer';
       c.classList.toggle('front',front);
